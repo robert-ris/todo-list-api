@@ -34,8 +34,29 @@ export class TasksController {
     @Param('id', ParseIntPipe) id: number,
     @Body(ValidationPipe) dto: TaskDto
   ) {
-    return this.service.update(id, dto);
+    // return this.service.update(id, dto);
+    try {
+      await this.service.update(id, dto);
+      return { status: 1 };
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
   }
+
+  @Patch('update-status/:id')
+  async updateStatus(
+    @Param('id', ParseIntPipe) id: number,
+    @Body(ValidationPipe) dto: TaskDto
+  ) {
+    // return this.service.update(id, dto);
+    try {
+      await this.service.updateStatus(id, dto);
+      return { status: 1 };
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
+  }
+
 
   @Delete(':id')
   async delete(

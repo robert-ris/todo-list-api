@@ -4,6 +4,7 @@ import * as moment from "moment";
 import { FindOneOptions, Repository } from "typeorm";
 import { Task } from '../entities/task.entity';
 import { TaskDto } from "./dto/task.dto";
+import { UpdateStatusDto } from "./dto/updateStatus.dto";
 
 @Injectable()
 export class TasksService {
@@ -28,6 +29,10 @@ export class TasksService {
   }
 
   async update(id: number, dto: TaskDto) {
+    return this.repository.update(id, dto);
+  }
+
+  async updateStatus(id: number, dto: UpdateStatusDto) {
     return this.repository.update(id, dto);
   }
 
